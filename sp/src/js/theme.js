@@ -58,7 +58,7 @@ const colorSets = [
 function preloadImages() {
   for (let i = 0; i < images.length; i++) {
     const img = new Image();
-    img.src = "..sp/src/images/" + images[i];
+    img.src = "src/images/" + images[i];
   }
 }
 
@@ -70,7 +70,7 @@ function nextImage() {
   updateColors(currentIndex);
 
   setTimeout(() => {
-    imageElement.src = "..sp/src/images/" + images[currentIndex];
+    imageElement.src = "src/images/" + images[currentIndex];
     imageElement.style.opacity = 1;
   }, 200); // Match the transition duration in style.css
 }
