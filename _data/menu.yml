@@ -4,10 +4,11 @@
 entries:
   - title: info
     entries:
-      - title: a (nearly) no-CSS, fast, minimalist Jekyll theme.
-      - title: github repo
-        url: https://github.com/riggraz/no-style-please
-      - title: "used by <a href='https://riggraz.dev'>riggraz.dev</a> and <a href='https://github.com/riggraz/no-style-please/network/dependents'>many others</a>"
+      - title: a blog about a boy and his opinions and his tech.
+      - title: bsky
+        url: https://bsky.app/profile/rozodru.bsky.social
+      - title: mastodon
+		url: https://social.vivaldi.net/@rozodru	
 
   - title: all posts
     post_list:
@@ -26,13 +27,3 @@ entries:
   - title: rss
     url: feed.xml
   
-  - title: another list
-    entries:
-      - title: with subitems
-        entries:
-          - title: with subsubitems
-          - title: example page
-            url: about
-  - title: PRO TIP
-    entries:
-      - title: to edit this menu, edit _data/menu.yml file
