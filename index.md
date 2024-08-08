@@ -2,13 +2,14 @@
 layout: home
 permalink: /
 permalink_name: /home
-title: the rozo blog
+list_title: Read Our Latest Posts
+title: ''
 
-detail_image: assets/theme_logo.svg
+detail_image: assets/logo.png
 
 ---
 
-# jekyll-shell-theme
+# the rozo blog home
 
 **Jekyll Shell Theme** is an open source light-weight customizable jekyll theme for your site! You can use it to spice up your personal profiles, project pages or just about anything!
 
