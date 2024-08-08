@@ -7,10 +7,6 @@ entries:
       - title: a blog about a boy and his opinions and his tech.
       - title: bsky
         url: https://bsky.app/profile/rozodru.bsky.social
-        - title: mastodon
-        url: https://social.vivaldi.net/@rozodru
-        -title: linkedin
-        url: https://www.linkedin.com/in/drew-mcmanus-44389b2ba/
 
   - title: all posts
     post_list:
