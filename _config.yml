@@ -1,3 +1,4 @@
 theme: minima
 title: the rozo blog
 description: opinions and musings of one guy
+premote_theme: "tareqdandachi/jekyll-shell-theme"
