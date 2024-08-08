@@ -1,4 +1,29 @@
-theme: minima
 title: the rozo blog
-description: opinions and musings of one guy
-remote_theme: "tareqdandachi/jekyll-shell-theme"
+email: rozodru@gmail.com
+description: >- # this means to ignore newlines until "baseurl:"
+  a blog about a boy and his opinions
+baseurl: "/blog" # the subpath of your site
+url: "domain.xyz" # the base hostname & protocol for your site
+# twitter_username: 
+github_username:  rozodru
+
+# Required plugins for the theme to work properly
+plugins:
+  - jekyll-remote-theme
+  - jemoji
+
+# Including jekyll-shell-theme using the jekyll-remote-theme plugin
+remote_theme: tareqdandachi/jekyll-shell-theme
+
+sass:
+  style: compressed
+
+highlighter: rouge #selecting the highlighter, default is rouge
+
+header_pages:
+  - index.md
+  - about.md
+  - a-third-page.md
+
+# controls how big the shell and font looks
+font-size: small # options: [small] or [large]
