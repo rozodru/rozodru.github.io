@@ -17,8 +17,8 @@ html {
   justify-content: center;
   height: 100svh;
   background-color: #000000;
+  /*change background image here */
   background-image: url("../img/bg.png");
-  /* replace background here */
   background-size: cover;
   overflow-x: clip;
 }
@@ -37,6 +37,8 @@ body {
 
 #greeting {
   font-size: 2.5em;
+  /* change title color */
+  color: #aa00ff;
   font-weight: 900;
   grid-column: 1/-1;
   text-align: center;
@@ -46,12 +48,15 @@ body {
 .header {
   font-size: 1.6em;
   font-weight: 600;
+  /* change header color */
+  color: #aa00ff;
 }
 
 #stream {
   margin-top: 5%;
   display: grid;
-  border: 3px solid #FFF !important;
+  /* change streamer border here */
+  border: 3px solid #aa00ff !important;
   border-radius: 10px;
 }
 
@@ -60,9 +65,20 @@ body {
   display: grid;
   grid-row-gap: 0.5em;
   grid-template-columns: repeat(3, 1fr);
-  border: 3px solid #FFF !important;
+  /* change info panel border/color here */
+  border: 3px solid #aa00ff !important;
   border-radius: 10px;
   padding: 0.01em 16px;
+}
+
+/* link color */
+a {
+  color: #aa00ff;
+}
+
+/*icon color */
+i {
+  color: #aa00ff;
 }
 
 ul {
