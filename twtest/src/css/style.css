@@ -32,6 +32,7 @@ body {
   font-family: SpaceMono Nerd Font, monospace;
   justify-content: center;
   align-items: center;
+  margin-top: 25%;
 }
 
 #greeting {
@@ -54,7 +55,7 @@ body {
 #links {
   display: grid;
   grid-row-gap: 0.5em;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(3, 1fr);
 }
 
 ul {
