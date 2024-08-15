@@ -35,10 +35,20 @@ body {
   margin-top: 5%;
 }
 
+#main {
+  opacity: 0;
+  transition: opacity 0.2s ease-in;
+  text-shadow: 2px 2px black;
+}
+
+#main.loaded {
+  opacity: 1;
+}
+
 #greeting {
   font-size: 2.5em;
   /* change title color */
-  color: #aa00ff;
+  color: #fff;
   font-weight: 900;
   grid-column: 1/-1;
   text-align: center;
@@ -49,14 +59,14 @@ body {
   font-size: 1.6em;
   font-weight: 600;
   /* change header color */
-  color: #aa00ff;
+  color: #fff;
 }
 
 #stream {
   margin-top: 5%;
   display: grid;
   /* change streamer border here */
-  border: 3px solid #aa00ff !important;
+  border: 3px solid #fff !important;
   border-radius: 10px;
 }
 
@@ -66,19 +76,19 @@ body {
   grid-row-gap: 0.5em;
   grid-template-columns: repeat(3, 1fr);
   /* change info panel border/color here */
-  border: 3px solid #aa00ff !important;
+  border: 3px solid #fff !important;
   border-radius: 10px;
   padding: 0.01em 16px;
 }
 
 /* link color */
 a {
-  color: #aa00ff;
+  color: #fff;
 }
 
 /*icon color */
 .fa-brands {
-  color: #aa00ff;
+  color: #fff;
 }
 
 ul {
