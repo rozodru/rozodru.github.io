@@ -36,14 +36,10 @@ body {
 }
 
 #main {
-  opacity: 0;
-  transition: opacity 0.2s ease-in;
   text-shadow: 2px 2px black;
 }
 
-#main.loaded {
-  opacity: 1;
-}
+
 
 #greeting {
   font-size: 2.5em;
