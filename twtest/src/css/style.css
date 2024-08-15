@@ -58,6 +58,7 @@ body {
   /* change streamer border here */
   border: 3px solid #aa00ff !important;
   border-radius: 10px;
+  padding: 0.01em 16px;
 }
 
 #links {
