@@ -18,6 +18,7 @@ html {
   height: 100svh;
   background-color: #000000;
   background-image: url("../img/bg.jpg");
+  /* replace background here */
   background-size: cover;
   overflow-x: clip;
 }
