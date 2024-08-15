@@ -27,23 +27,26 @@ html.loaded {
 }
 
 body {
-  display: flex;
+  display: grid;
   color: ;
   font-family: SpaceMono Nerd Font, monospace;
   justify-content: center;
   align-items: center;
 }
 
+.header {
+  font-size: 1.6em;
+  font-weight: 600;
+}
+
 #stream {
   display: grid;
-  position: relative;
 }
 
 #links {
   display: grid;
   grid-row-gap: 0.5em;
   grid-template-columns: repeat(2, 1fr);
-  position: relative;
 }
 
 ul {
