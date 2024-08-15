@@ -33,3 +33,19 @@ body {
   justify-content: center;
   align-items: center;
 }
+
+#stream {
+  display: grid;
+}
+
+#links {
+  display: grid;
+  grid-row-gap: 0.5em;
+  grid-template-columns: repeat(2, 1fr);
+}
+
+ul {
+  list-style-type: none;
+  padding-left: 1em;
+  margin-left: 0;
+}
