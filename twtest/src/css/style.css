@@ -1,0 +1,35 @@
+@font-face {
+  font-family: "SpaceMono Nerd Font";
+  font-display: swap;
+  src:
+    local("SpaceMono Nerd Font"),
+    url(),
+    url();
+}
+
+:root {
+  color-scheme: dark;
+}
+
+html {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100svh;
+  background-color: #000000;
+  background-image: url("..src/img/bg.jpg");
+  background-size: cover;
+  overflow-x: clip;
+}
+
+html.loaded {
+  transition: background-color 0.2s ease-in-out;
+}
+
+body {
+  display: flex;
+  color: ;
+  font-family: SpaceMono Nerd Font, monospace;
+  justify-content: center;
+  align-items: center;
+}
