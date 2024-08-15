@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <title>stream hub</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <script src="https://kit.fontawesome.com/50ca4bca32.js" crossorigin="anonymous"></script>
+  <link href="../src/css/style.css" rel="stylesheet" />
+</head>
+<body>
+  <div id="stream">
+      <!-- stream embed can be twitch, youtube, kick, tiktok, etc -->
+      <!-- example here will be twitch -->
+    <div id="twitch-embed"></div>
+
+    <!-- Load the Twitch embed JavaScript file -->
+    <script src="https://embed.twitch.tv/embed/v1.js"></script>
+
+    <!-- Create a Twitch.Embed object that will render within the "twitch-embed" element -->
+    <script type="text/javascript">
+      new Twitch.Embed("twitch-embed", {
+        width: 854,
+        height: 480,
+        channel: "CohhCarnage",
+        // Only needed if this page is going to be embedded on other websites
+        parent: ["embed.example.com", "othersite.example.com"]
+      });
+    </script>
+  </div>
+  <div id="chat">
+      <!-- chat can be same as above -->
+  </div>
+  <div id="links">
+      <!-- comment out or remove any socal links you don't need -->
+      <div class="urls">
+        <div class="header"> <i class=""></i></div>
+        <ul>
+          <li><a href=""></a></li>
+        </ul>
+      </div>
+  </div>
+</body>
+</html>
