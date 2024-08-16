@@ -23,7 +23,7 @@ html {
   justify-content: center;
   height: 100svh;
   background-color: var(--background-color);
-  background-image: url("../bgs/beat.png");
+  background-image: url("../bgs/girl.png");
   background-size: cover;
   overflow-x: clip;
 }
@@ -76,6 +76,7 @@ body {
 }
 
 @media (max-width: 800px) {
+
   img,
   #image {
     display: none;
@@ -137,5 +138,5 @@ a:hover {
 }
 
 #image {
-	padding-right: 1em;
+  padding-right: 1em;
 }
