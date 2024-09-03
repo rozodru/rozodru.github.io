@@ -4,7 +4,7 @@ html {
   justify-content: center;
   height: 100svh;
   /*drop whatever background you want into the img folder and replace it here*/
-  background-image: url(img/RedMoon.png);
+  background-image: url(img/akira3.jpg);
   background-size: cover;
   overflow-x: clip;
 }
