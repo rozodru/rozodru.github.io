@@ -4,7 +4,7 @@ html {
   justify-content: center;
   height: 100svh;
   /*drop whatever background you want into the img folder and replace it here*/
-  background-image: url(img/killakill1.png);
+  background-image: url(img/misato.png);
   background-size: cover;
   overflow-x: clip;
 }
@@ -22,7 +22,7 @@ body {
 }
 
 #greeting {
-  color: #c93d2a;
+  color: #A555AF;
   font-size: 2.5em;
   font-weight: 900;
   grid-column: 1/-1;
@@ -33,7 +33,7 @@ body {
 #date {
   font-size: 1.3em;
   font-weight: 600;
-  color: #c93d2a;
+  color: #20DAF2;
   display: grid;
   grid-column: 1/-1;
   text-align: center;
@@ -73,7 +73,7 @@ body {
 }
 
 .category-title {
-  color: #c93d2a;
+  color: #A555AF;
   margin: 5px;
 }
 
@@ -90,7 +90,7 @@ a:visited {
 }
 
 a:hover {
-  color: #c93d2a;
+  color: #A555AF;
 }
 
 a:active {
@@ -113,7 +113,7 @@ li {
   line-height: 20px;
   color: #369;
   font-weight: bold;
-  border-left: 1px solid #93a1a1;
+  border-left: 1px solid #20DAF2;
 
 }
 
@@ -127,12 +127,12 @@ li:before {
   height: 1em;
   width: 12px;
   color: white;
-  border-bottom: 1px solid #93a1a1;
+  border-bottom: 1px solid #20DAF2;
   content: "";
   display: inline-block;
   left: -7px;
 }
 
 li:last-child:before {
-  border-left: 1px solid #93a1a1;
+  border-left: 1px solid #20DAF2;
 }
