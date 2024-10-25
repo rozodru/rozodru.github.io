@@ -4,13 +4,13 @@ html {
   justify-content: center;
   height: 100svh;
   /*drop whatever background you want into the img folder and replace it here*/
-  background-image: url(img/misato1.jpg);
+  background-image: url(img/wipeout.png);
   background-size: cover;
   overflow-x: clip;
 }
 
 body {
-  color: #20DAf2;
+  color: #ffffff;
   margin: 0px;
 }
 
@@ -22,7 +22,7 @@ body {
 }
 
 #greeting {
-  color: #A555AF;
+  color: #c10000;
   font-size: 2.5em;
   font-weight: 900;
   grid-column: 1/-1;
@@ -33,7 +33,7 @@ body {
 #date {
   font-size: 1.3em;
   font-weight: 600;
-  color: #20DAF2;
+  color: #ffffff;
   display: grid;
   grid-column: 1/-1;
   text-align: center;
@@ -73,7 +73,7 @@ body {
 }
 
 .category-title {
-  color: #A555AF;
+  color: #c10000;
   margin: 5px;
 }
 
@@ -82,15 +82,15 @@ a {
 }
 
 a:link {
-  color: #20DAF2;
+  color: #ffffff;
 }
 
 a:visited {
-  color: #20DAF2;
+  color: #ffffff;
 }
 
 a:hover {
-  color: #A555AF;
+  color: #c10000;
 }
 
 a:active {
@@ -113,7 +113,7 @@ li {
   line-height: 20px;
   color: #369;
   font-weight: bold;
-  border-left: 1px solid #20DAF2;
+  border-left: 1px solid #ffffff;
 
 }
 
@@ -127,12 +127,12 @@ li:before {
   height: 1em;
   width: 12px;
   color: white;
-  border-bottom: 1px solid #20DAF2;
+  border-bottom: 1px solid #ffffff;
   content: "";
   display: inline-block;
   left: -7px;
 }
 
 li:last-child:before {
-  border-left: 1px solid #20DAF2;
+  border-left: 1px solid #ffffff;
 }
