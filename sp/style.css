@@ -17,7 +17,7 @@ body {
 #greeting,
 #grid-container,
 #date {
-  font-family: "Gohu Font 11 Nerd Font";
+  font-family: "Lucida Console", "Courier New", monospace;
   text-shadow: 2px 2px 3px black;
 }
 
