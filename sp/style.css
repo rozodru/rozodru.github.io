@@ -17,12 +17,12 @@ body {
 #greeting,
 #grid-container,
 #date {
-  font-family: "Lucida Console", "Courier New", monospace;
+  font-family: "Gohu Font 11 Nerd Font";
   text-shadow: 2px 2px 3px black;
 }
 
 #greeting {
-  color: #c10000;
+  color: #474747;
   font-size: 2.5em;
   font-weight: 900;
   grid-column: 1/-1;
@@ -33,7 +33,7 @@ body {
 #date {
   font-size: 1.3em;
   font-weight: 600;
-  color: #ffffff;
+  color: #CCCCCC;
   display: grid;
   grid-column: 1/-1;
   text-align: center;
@@ -73,7 +73,7 @@ body {
 }
 
 .category-title {
-  color: #c10000;
+  color: #474747;
   margin: 5px;
 }
 
