@@ -145,7 +145,7 @@
     }
 
     a:visited {
-        color: #009900;
+        color: #00cc33;
     }
 
     a:hover {
@@ -240,34 +240,7 @@
   <div id="greeting">what i thought i'd do was...</div>
   <div id="date"></div>
   
-  <!-- Fallback date/time script since js/date.js might not exist -->
-  <script>
-    // Simple date/time update function
-    function updateDateTime() {
-        const now = new Date();
-        const options = { 
-            weekday: 'long', 
-            year: 'numeric', 
-            month: 'long', 
-            day: 'numeric',
-            hour: '2-digit',
-            minute: '2-digit',
-            second: '2-digit',
-            hour12: false
-        };
-        const dateString = now.toLocaleDateString('en-US', options);
-        document.getElementById('date').textContent = dateString;
-    }
     
-    // Try to load external date script, fallback to internal if it fails
-    try {
-        updateDateTime();
-        setInterval(updateDateTime, 1000);
-    } catch (e) {
-        console.log('Using fallback date function');
-    }
-  </script>
-  
   <script async src="js/date.js" onerror="console.log('date.js not found, using fallback')"></script>
   
   <!-- you can add or remove whatever links you want. even new categories. just follow the examples below -->
