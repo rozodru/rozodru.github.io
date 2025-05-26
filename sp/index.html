@@ -1,15 +1,242 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>~/startpage</title>
-  <link rel="stylesheet" href="style.css">
-</head>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap');
 
+    /* Matrix Digital Rain Background */
+    #matrix-bg {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: #000;
+        z-index: -1;
+        overflow: hidden;
+    }
+
+    .matrix-column {
+        position: absolute;
+        top: -100%;
+        color: #00ff41;
+        font-family: 'Courier New', monospace;
+        font-size: 14px;
+        line-height: 14px;
+        white-space: pre;
+        animation: fall linear infinite;
+        text-shadow: 0 0 5px #00ff41;
+    }
+
+    @keyframes fall {
+        to {
+            transform: translateY(100vh);
+        }
+    }
+
+    html {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100svh;
+        background: #000;
+        overflow-x: clip;
+    }
+
+    body {
+        color: #00ff41;
+        margin: 0px;
+        background: rgba(0, 0, 0, 0.8);
+        backdrop-filter: blur(1px);
+    }
+
+    #greeting,
+    #grid-container,
+    #date {
+        font-family: 'Orbitron', 'Lucida Console', 'Courier New', monospace;
+        text-shadow: 0 0 10px #00ff41, 0 0 20px #00ff41, 0 0 30px #00ff41;
+    }
+
+    #greeting {
+        color: #00ff41;
+        font-size: 2.5em;
+        font-weight: 900;
+        grid-column: 1/-1;
+        text-align: center;
+        display: grid;
+        animation: glow 2s ease-in-out infinite alternate;
+    }
+
+    @keyframes glow {
+        from {
+            text-shadow: 0 0 10px #00ff41, 0 0 20px #00ff41, 0 0 30px #00ff41;
+        }
+        to {
+            text-shadow: 0 0 20px #00ff41, 0 0 30px #00ff41, 0 0 40px #00ff41;
+        }
+    }
+
+    #date {
+        font-size: 1.3em;
+        font-weight: 600;
+        color: #00cc33;
+        display: grid;
+        grid-column: 1/-1;
+        text-align: center;
+        margin: 1em 0;
+        text-shadow: 0 0 8px #00cc33;
+    }
+
+    #grid {
+        width: 100%;
+        display: grid;
+        flex-wrap: wrap;
+        justify-content: center;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1rem;
+        padding: 50px 150px 10px;
+    }
+
+    #grid-container {
+        color: #00ff41;
+        display: flex;
+        height: 100%;
+        justify-content: center;
+        text-decoration: none;
+    }
+
+    .category-container {
+        padding: 25px;
+        border-radius: 10px;
+        flex-basis: calc(20% - 10px);
+        min-width: 250px;
+        background: rgba(0, 20, 0, 0.3);
+        border: 1px solid #00ff41;
+        box-shadow: 0 0 15px rgba(0, 255, 65, 0.3);
+        transition: all 0.3s ease;
+    }
+
+    .category-container:hover {
+        background: rgba(0, 40, 0, 0.8);
+        border-color: #00cc33;
+        box-shadow: 0 0 25px rgba(0, 255, 65, 0.6);
+        transform: translateY(-5px);
+        transition: all 0.3s ease;
+    }
+
+    .category-title {
+        color: #00ff41;
+        margin: 5px;
+        text-shadow: 0 0 8px #00ff41;
+        font-weight: 700;
+    }
+
+    a {
+        text-decoration: none;
+        transition: all 0.2s ease;
+    }
+
+    a:link {
+        color: #00cc33;
+    }
+
+    a:visited {
+        color: #009900;
+    }
+
+    a:hover {
+        color: #00ff41;
+        text-shadow: 0 0 8px #00ff41;
+    }
+
+    a:active {
+        color: #66ff66;
+    }
+
+    ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+    }
+
+    ul {
+        margin-left: 10px;
+    }
+
+    li {
+        margin: 0;
+        padding: 0 7px;
+        line-height: 20px;
+        color: #00cc33;
+        font-weight: bold;
+        border-left: 1px solid #00ff41;
+        transition: all 0.2s ease;
+    }
+
+    li:hover {
+        color: #00ff41;
+        text-shadow: 0 0 5px #00ff41;
+    }
+
+    li:last-child {
+        border-left: none;
+    }
+
+    li:before {
+        position: relative;
+        top: -0.3em;
+        height: 1em;
+        width: 12px;
+        color: #00ff41;
+        border-bottom: 1px solid #00ff41;
+        content: "";
+        display: inline-block;
+        left: -7px;
+    }
+
+    li:last-child:before {
+        border-left: 1px solid #00ff41;
+    }
+
+    /* Additional Matrix effects */
+    .matrix-text {
+        animation: flicker 0.15s infinite linear;
+    }
+
+    @keyframes flicker {
+        0%, 19.999%, 22%, 62.999%, 64%, 64.999%, 70%, 100% {
+            opacity: 1;
+        }
+        20%, 21.999%, 63%, 63.999%, 65%, 69.999% {
+            opacity: 0.4;
+        }
+    }
+
+    /* Scanline effect */
+    .scanlines {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(transparent 50%, rgba(0, 255, 65, 0.03) 50%);
+        background-size: 100% 4px;
+        pointer-events: none;
+        z-index: 1000;
+    }
+  </style>
+</head>
 <body>
+  <!-- Matrix Digital Rain Background -->
+  <div id="matrix-bg"></div>
+  
+  <!-- Scanline overlay -->
+  <div class="scanlines"></div>
+
   <div id="greeting">what i thought i'd do was...</div>
   <div id="date"></div>
   <script async src="js/date.js"></script>
@@ -77,6 +304,117 @@
         }
     </script>
   <script src="js/index.js"></script>
-</body>
 
+  <script>
+    // Generate sections from JSON data
+    function generateSections() {
+        const linksData = JSON.parse(document.getElementById('links').textContent);
+        const body = document.body;
+        
+        // Create grid container
+        const grid = document.createElement('div');
+        grid.id = 'grid';
+        
+        // Generate sections for each category
+        Object.keys(linksData).forEach(category => {
+            const categoryContainer = document.createElement('div');
+            categoryContainer.className = 'category-container';
+            
+            const categoryTitle = document.createElement('div');
+            categoryTitle.className = 'category-title';
+            categoryTitle.textContent = category;
+            
+            const ul = document.createElement('ul');
+            
+            Object.keys(linksData[category]).forEach(linkName => {
+                const li = document.createElement('li');
+                const a = document.createElement('a');
+                a.href = linksData[category][linkName];
+                a.textContent = linkName;
+                li.appendChild(a);
+                ul.appendChild(li);
+            });
+            
+            categoryContainer.appendChild(categoryTitle);
+            categoryContainer.appendChild(ul);
+            grid.appendChild(categoryContainer);
+        });
+        
+        // Insert grid after date element
+        const dateElement = document.getElementById('date');
+        dateElement.parentNode.insertBefore(grid, dateElement.nextSibling);
+    }
+    
+    // Update date and time
+    function updateDateTime() {
+        const now = new Date();
+        const options = { 
+            weekday: 'long', 
+            year: 'numeric', 
+            month: 'long', 
+            day: 'numeric',
+            hour: '2-digit',
+            minute: '2-digit',
+            second: '2-digit',
+            hour12: false
+        };
+        const dateString = now.toLocaleDateString('en-US', options);
+        document.getElementById('date').textContent = dateString;
+    }
+    
+    // Matrix digital rain effect
+    function createMatrixRain() {
+        const matrixBg = document.getElementById('matrix-bg');
+        const characters = 'アァカサタナハマヤャラワガザダバパイィキシチニヒミリヰギジヂビピウゥクスツヌフムユュルグズブヅプエェケセテネヘメレヱゲゼデベペオォコソトホモヨョロヲゴゾドボポヴッン0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        
+        const columns = Math.floor(window.innerWidth / 20);
+        
+        for (let i = 0; i < columns; i++) {
+            const column = document.createElement('div');
+            column.className = 'matrix-column';
+            column.style.left = (i * 20) + 'px';
+            column.style.animationDuration = Math.random() * 8 + 6 + 's';
+            column.style.animationDelay = Math.random() * 5 + 's';
+            
+            let text = '';
+            const length = Math.floor(Math.random() * 50) + 10;
+            for (let j = 0; j < length; j++) {
+                text += characters.charAt(Math.floor(Math.random() * characters.length)) + '\n';
+            }
+            
+            column.textContent = text;
+            matrixBg.appendChild(column);
+        }
+    }
+
+    // Initialize everything when page loads
+    document.addEventListener('DOMContentLoaded', function() {
+        generateSections();
+        createMatrixRain();
+        updateDateTime();
+        // Update time every second
+        setInterval(updateDateTime, 1000);
+    });
+
+    // Recreate on window resize
+    window.addEventListener('resize', () => {
+        document.getElementById('matrix-bg').innerHTML = '';
+        createMatrixRain();
+    });
+
+    // Random character changes for extra effect
+    setInterval(() => {
+        const columns = document.querySelectorAll('.matrix-column');
+        columns.forEach(column => {
+            if (Math.random() < 0.1) {
+                const characters = 'アァカサタナハマヤャラワガザダバパイィキシチニヒミリヰギジヂビピウゥクスツヌフムユュルグズブヅプエェケセテネヘメレヱゲゼデベペオォコソトホモヨョロヲゴゾドボポヴッン0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+                const lines = column.textContent.split('\n');
+                const randomLine = Math.floor(Math.random() * lines.length);
+                lines[randomLine] = characters.charAt(Math.floor(Math.random() * characters.length));
+                column.textContent = lines.join('\n');
+            }
+        });
+            }, 500);
+  </script>
+</body>
 </html>
