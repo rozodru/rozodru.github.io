@@ -239,7 +239,36 @@
 
   <div id="greeting">what i thought i'd do was...</div>
   <div id="date"></div>
-  <script async src="js/date.js"></script>
+  
+  <!-- Fallback date/time script since js/date.js might not exist -->
+  <script>
+    // Simple date/time update function
+    function updateDateTime() {
+        const now = new Date();
+        const options = { 
+            weekday: 'long', 
+            year: 'numeric', 
+            month: 'long', 
+            day: 'numeric',
+            hour: '2-digit',
+            minute: '2-digit',
+            second: '2-digit',
+            hour12: false
+        };
+        const dateString = now.toLocaleDateString('en-US', options);
+        document.getElementById('date').textContent = dateString;
+    }
+    
+    // Try to load external date script, fallback to internal if it fails
+    try {
+        updateDateTime();
+        setInterval(updateDateTime, 1000);
+    } catch (e) {
+        console.log('Using fallback date function');
+    }
+  </script>
+  
+  
   <!-- you can add or remove whatever links you want. even new categories. just follow the examples below -->
   <script id="links" type="application/json">
         {
@@ -303,66 +332,10 @@
             }
         }
     </script>
-  <script src="js/index.js"></script>
+  
 
   <script>
-    // Generate sections from JSON data
-    function generateSections() {
-        const linksData = JSON.parse(document.getElementById('links').textContent);
-        const body = document.body;
-        
-        // Create grid container
-        const grid = document.createElement('div');
-        grid.id = 'grid';
-        
-        // Generate sections for each category
-        Object.keys(linksData).forEach(category => {
-            const categoryContainer = document.createElement('div');
-            categoryContainer.className = 'category-container';
-            
-            const categoryTitle = document.createElement('div');
-            categoryTitle.className = 'category-title';
-            categoryTitle.textContent = category;
-            
-            const ul = document.createElement('ul');
-            
-            Object.keys(linksData[category]).forEach(linkName => {
-                const li = document.createElement('li');
-                const a = document.createElement('a');
-                a.href = linksData[category][linkName];
-                a.textContent = linkName;
-                li.appendChild(a);
-                ul.appendChild(li);
-            });
-            
-            categoryContainer.appendChild(categoryTitle);
-            categoryContainer.appendChild(ul);
-            grid.appendChild(categoryContainer);
-        });
-        
-        // Insert grid after date element
-        const dateElement = document.getElementById('date');
-        dateElement.parentNode.insertBefore(grid, dateElement.nextSibling);
-    }
-    
-    // Update date and time
-    function updateDateTime() {
-        const now = new Date();
-        const options = { 
-            weekday: 'long', 
-            year: 'numeric', 
-            month: 'long', 
-            day: 'numeric',
-            hour: '2-digit',
-            minute: '2-digit',
-            second: '2-digit',
-            hour12: false
-        };
-        const dateString = now.toLocaleDateString('en-US', options);
-        document.getElementById('date').textContent = dateString;
-    }
-    
-    // Matrix digital rain effect
+    // Matrix digital rain effect - only add this
     function createMatrixRain() {
         const matrixBg = document.getElementById('matrix-bg');
         const characters = 'アァカサタナハマヤャラワガザダバパイィキシチニヒミリヰギジヂビピウゥクスツヌフムユュルグズブヅプエェケセテネヘメレヱゲゼデベペオォコソトホモヨョロヲゴゾドボポヴッン0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
@@ -387,14 +360,8 @@
         }
     }
 
-    // Initialize everything when page loads
-    document.addEventListener('DOMContentLoaded', function() {
-        generateSections();
-        createMatrixRain();
-        updateDateTime();
-        // Update time every second
-        setInterval(updateDateTime, 1000);
-    });
+    // Initialize matrix rain when page loads
+    createMatrixRain();
 
     // Recreate on window resize
     window.addEventListener('resize', () => {
@@ -414,7 +381,7 @@
                 column.textContent = lines.join('\n');
             }
         });
-            }, 500);
+    }, 500);
   </script>
 </body>
 </html>
