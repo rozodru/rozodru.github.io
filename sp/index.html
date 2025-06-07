@@ -6,356 +6,610 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>~/startpage</title>
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Share+Tech+Mono&display=swap');
 
-    /* Matrix Digital Rain Background */
-    #matrix-bg {
+    * {
+      box-sizing: border-box;
+    }
+
+    /* Animated geometric background */
+    #cyber-bg {
         position: fixed;
         top: 0;
         left: 0;
         width: 100%;
         height: 100%;
-        background: #000;
-        z-index: -1;
+        background: linear-gradient(135deg, #0f0f0f 0%, #1a1a1a 50%, #2a2a2a 100%);
+        z-index: -3;
         overflow: hidden;
     }
 
-    .matrix-column {
-        position: absolute;
-        top: -100%;
-        color: #00ff41;
-        font-family: 'Courier New', monospace;
-        font-size: 14px;
-        line-height: 14px;
-        white-space: pre;
-        animation: fall linear infinite;
-        text-shadow: 0 0 5px #00ff41;
-    }
-
-    @keyframes fall {
-        to {
-            transform: translateY(100vh);
-        }
-    }
-
-    html {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        height: 100svh;
-        background: #000;
-        overflow-x: clip;
-    }
-
-    body {
-        color: #00ff41;
-        margin: 0px;
-        background: rgba(0, 0, 0, 0.8);
-        backdrop-filter: blur(1px);
-    }
-
-    #greeting,
-    #grid-container,
-    #date {
-        font-family: 'Orbitron', 'Lucida Console', 'Courier New', monospace;
-        text-shadow: 0 0 10px #00ff41, 0 0 20px #00ff41, 0 0 30px #00ff41;
-    }
-
-    #greeting {
-        color: #00ff41;
-        font-size: 2.5em;
-        font-weight: 900;
-        grid-column: 1/-1;
-        text-align: center;
-        display: grid;
-        animation: glow 2s ease-in-out infinite alternate;
-    }
-
-    @keyframes glow {
-        from {
-            text-shadow: 0 0 10px #00ff41, 0 0 20px #00ff41, 0 0 30px #00ff41;
-        }
-        to {
-            text-shadow: 0 0 20px #00ff41, 0 0 30px #00ff41, 0 0 40px #00ff41;
-        }
-    }
-
-    #date {
-        font-size: 1.3em;
-        font-weight: 600;
-        color: #00cc33;
-        display: grid;
-        grid-column: 1/-1;
-        text-align: center;
-        margin: 1em 0;
-        text-shadow: 0 0 8px #00cc33;
-    }
-
-    #grid {
+    /* Hexagonal grid overlay */
+    .hex-grid {
+        position: fixed;
+        top: 0;
+        left: 0;
         width: 100%;
-        display: grid;
-        flex-wrap: wrap;
-        justify-content: center;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 1rem;
-        padding: 50px 150px 10px;
-    }
-
-    #grid-container {
-        color: #00ff41;
-        display: flex;
         height: 100%;
-        justify-content: center;
-        text-decoration: none;
+        background-image: 
+            radial-gradient(circle at 50% 50%, rgba(200, 200, 200, 0.1) 1px, transparent 1px),
+            linear-gradient(0deg, rgba(200, 200, 200, 0.05) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(200, 200, 200, 0.05) 1px, transparent 1px);
+        background-size: 30px 30px, 30px 30px, 30px 30px;
+        z-index: -2;
+        animation: gridMove 20s linear infinite;
     }
 
-    .category-container {
-        padding: 25px;
-        border-radius: 10px;
-        flex-basis: calc(20% - 10px);
-        min-width: 250px;
-        background: rgba(0, 20, 0, 0.3);
-        border: 1px solid #00ff41;
-        box-shadow: 0 0 15px rgba(0, 255, 65, 0.3);
-        transition: all 0.3s ease;
+    @keyframes gridMove {
+        0% { transform: translate(0, 0); }
+        100% { transform: translate(30px, 30px); }
     }
 
-    .category-container:hover {
-        background: rgba(0, 40, 0, 0.8);
-        border-color: #00cc33;
-        box-shadow: 0 0 25px rgba(0, 255, 65, 0.6);
-        transform: translateY(-5px);
-        transition: all 0.3s ease;
+    /* Data stream particles */
+    .data-stream {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+        pointer-events: none;
     }
 
-    .category-title {
-        color: #00ff41;
-        margin: 5px;
-        text-shadow: 0 0 8px #00ff41;
-        font-weight: 700;
+    .data-particle {
+        position: absolute;
+        width: 2px;
+        height: 20px;
+        background: linear-gradient(to bottom, transparent, #cccccc, transparent);
+        animation: dataFlow linear infinite;
+        opacity: 0.6;
     }
 
-    a {
-        text-decoration: none;
-        transition: all 0.2s ease;
-    }
-
-    a:link {
-        color: #00cc33;
-    }
-
-    a:visited {
-        color: #00cc33;
-    }
-
-    a:hover {
-        color: #00ff41;
-        text-shadow: 0 0 8px #00ff41;
-    }
-
-    a:active {
-        color: #66ff66;
-    }
-
-    ul {
-        list-style: none;
-        margin: 0;
-        padding: 0;
-    }
-
-    ul {
-        margin-left: 10px;
-    }
-
-    li {
-        margin: 0;
-        padding: 0 7px;
-        line-height: 20px;
-        color: #00cc33;
-        font-weight: bold;
-        border-left: 1px solid #00ff41;
-        transition: all 0.2s ease;
-    }
-
-    li:hover {
-        color: #00ff41;
-        text-shadow: 0 0 5px #00ff41;
-    }
-
-    li:last-child {
-        border-left: none;
-    }
-
-    li:before {
-        position: relative;
-        top: -0.3em;
-        height: 1em;
-        width: 12px;
-        color: #00ff41;
-        border-bottom: 1px solid #00ff41;
-        content: "";
-        display: inline-block;
-        left: -7px;
-    }
-
-    li:last-child:before {
-        border-left: 1px solid #00ff41;
-    }
-
-    /* Additional Matrix effects */
-    .matrix-text {
-        animation: flicker 0.15s infinite linear;
-    }
-
-    @keyframes flicker {
-        0%, 19.999%, 22%, 62.999%, 64%, 64.999%, 70%, 100% {
+    @keyframes dataFlow {
+        0% {
+            transform: translateY(-100vh) translateX(0);
+            opacity: 0;
+        }
+        10% {
             opacity: 1;
         }
-        20%, 21.999%, 63%, 63.999%, 65%, 69.999% {
-            opacity: 0.4;
+        90% {
+            opacity: 1;
+        }
+        100% {
+            transform: translateY(100vh) translateX(20px);
+            opacity: 0;
         }
     }
 
-    /* Scanline effect */
+    /* Scanlines */
     .scanlines {
         position: fixed;
         top: 0;
         left: 0;
         width: 100%;
         height: 100%;
-        background: linear-gradient(transparent 50%, rgba(0, 255, 65, 0.03) 50%);
+        background: linear-gradient(transparent 50%, rgba(255, 255, 255, 0.02) 50%);
         background-size: 100% 4px;
         pointer-events: none;
         z-index: 1000;
+        animation: scanlineMove 0.1s linear infinite;
+    }
+
+    @keyframes scanlineMove {
+        0% { transform: translateY(0); }
+        100% { transform: translateY(4px); }
+    }
+
+    /* Main layout */
+    html {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+        background: #000;
+        overflow-x: hidden;
+        font-family: 'Share Tech Mono', monospace;
+    }
+
+    body {
+        color: #e0e0e0;
+        margin: 0;
+        padding: 20px;
+        background: rgba(0, 0, 0, 0.85);
+        backdrop-filter: blur(2px);
+        border: 1px solid rgba(200, 200, 200, 0.3);
+        border-radius: 10px;
+        box-shadow: 
+            0 0 50px rgba(150, 150, 150, 0.2),
+            inset 0 0 30px rgba(255, 255, 255, 0.05);
+        max-width: 1200px;
+        width: 90%;
+    }
+
+    /* Header styles */
+    #greeting {
+        color: #f0f0f0;
+        font-family: 'Orbitron', monospace;
+        font-size: 2.8em;
+        font-weight: 900;
+        text-align: center;
+        margin-bottom: 10px;
+        text-transform: uppercase;
+        letter-spacing: 3px;
+        text-shadow: 
+            0 0 10px #cccccc,
+            0 0 20px #aaaaaa,
+            0 0 30px #888888;
+        animation: hologramFlicker 3s ease-in-out infinite;
+        position: relative;
+    }
+
+    #greeting::before {
+        content: '> SYSTEM ACTIVE';
+        position: absolute;
+        top: -30px;
+        left: 50%;
+        transform: translateX(-50%);
+        font-size: 0.3em;
+        color: #999999;
+        letter-spacing: 2px;
+        animation: typewriter 4s steps(13) infinite;
+    }
+
+    @keyframes hologramFlicker {
+        0%, 100% {
+            text-shadow: 
+                0 0 10px #cccccc,
+                0 0 20px #aaaaaa,
+                0 0 30px #888888;
+        }
+        50% {
+            text-shadow: 
+                0 0 5px #cccccc,
+                0 0 15px #aaaaaa,
+                0 0 25px #888888;
+        }
+        75% {
+            text-shadow: 
+                0 0 15px #cccccc,
+                0 0 25px #aaaaaa,
+                0 0 35px #888888;
+        }
+    }
+
+    @keyframes typewriter {
+        0% { width: 0; }
+        50% { width: 100%; }
+        100% { width: 0; }
+    }
+
+    #date {
+        font-family: 'Share Tech Mono', monospace;
+        font-size: 1.2em;
+        font-weight: 400;
+        color: #bbbbbb;
+        text-align: center;
+        margin: 20px 0 40px;
+        text-shadow: 0 0 10px #999999;
+        letter-spacing: 1px;
+    }
+
+    #date::before {
+        content: '[ ';
+        color: #cccccc;
+    }
+
+    #date::after {
+        content: ' ]';
+        color: #cccccc;
+    }
+
+    /* Grid layout */
+    #grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 25px;
+        padding: 20px 0;
+    }
+
+    .category-container {
+        padding: 25px;
+        border-radius: 8px;
+        background: linear-gradient(135deg, rgba(255, 255, 255, 0.08) 0%, rgba(200, 200, 200, 0.04) 100%);
+        border: 1px solid rgba(200, 200, 200, 0.25);
+        box-shadow: 
+            0 5px 15px rgba(0, 0, 0, 0.3),
+            inset 0 1px 0 rgba(255, 255, 255, 0.1);
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        position: relative;
+        overflow: hidden;
+    }
+
+    .category-container::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.15), transparent);
+        transition: left 0.6s;
+    }
+
+    .category-container:hover::before {
+        left: 100%;
+    }
+
+    .category-container:hover {
+        background: linear-gradient(135deg, rgba(255, 255, 255, 0.15) 0%, rgba(200, 200, 200, 0.08) 100%);
+        border-color: #dddddd;
+        box-shadow: 
+            0 10px 30px rgba(0, 0, 0, 0.4),
+            inset 0 1px 0 rgba(255, 255, 255, 0.2);
+        transform: translateY(-3px) scale(1.02);
+    }
+
+    .category-container:hover .category-title {
+        color: #ffffff;
+        text-shadow: 0 0 15px #cccccc;
+    }
+
+    .category-title {
+        color: #dddddd;
+        font-family: 'Orbitron', monospace;
+        font-size: 1.4em;
+        font-weight: 700;
+        margin: 0 0 20px 0;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        text-shadow: 0 0 10px #aaaaaa;
+        position: relative;
+        padding-bottom: 10px;
+    }
+
+    .category-title::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 30px;
+        height: 2px;
+        background: linear-gradient(90deg, #cccccc, transparent);
+        animation: expandLine 2s ease-in-out infinite;
+    }
+
+    @keyframes expandLine {
+        0%, 100% { width: 30px; }
+        50% { width: 60px; }
+    }
+
+    /* Link styles */
+    ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+    }
+
+    li {
+        margin: 0 0 8px 15px;
+        padding: 8px 12px;
+        line-height: 1.4;
+        color: #b8b8b8;
+        font-weight: 400;
+        border-left: 2px solid rgba(200, 200, 200, 0.3);
+        position: relative;
+        transition: all 0.2s ease;
+    }
+
+    li::before {
+        content: '▶';
+        position: absolute;
+        left: -8px;
+        color: #888888;
+        font-size: 0.8em;
+        opacity: 0;
+        transition: opacity 0.2s ease;
+    }
+
+    li:hover {
+        border-left-color: #dddddd;
+        color: #ffffff;
+        text-shadow: 0 0 8px #cccccc;
+        padding-left: 20px;
+    }
+
+    li:hover::before {
+        opacity: 1;
+    }
+
+    a {
+        text-decoration: none;
+        color: inherit;
+        transition: all 0.2s ease;
+        font-family: 'Share Tech Mono', monospace;
+        font-size: 0.95em;
+        letter-spacing: 0.5px;
+    }
+
+    a:hover {
+        color: #ffffff;
+        text-shadow: 
+            0 0 5px #cccccc,
+            0 0 10px #aaaaaa;
+    }
+
+    /* Floating UI elements */
+    .ui-element {
+        position: fixed;
+        color: #cccccc;
+        font-family: 'Share Tech Mono', monospace;
+        font-size: 0.8em;
+        opacity: 0.5;
+        pointer-events: none;
+        z-index: 500;
+    }
+
+    .ui-corner-tl {
+        top: 20px;
+        left: 20px;
+    }
+
+    .ui-corner-tr {
+        top: 20px;
+        right: 20px;
+    }
+
+    .ui-corner-bl {
+        bottom: 20px;
+        left: 20px;
+    }
+
+    .ui-corner-br {
+        bottom: 20px;
+        right: 20px;
+    }
+
+    /* Loading bar animation */
+    .loading-bar {
+        position: fixed;
+        bottom: 10px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 200px;
+        height: 3px;
+        background: rgba(200, 200, 200, 0.2);
+        border-radius: 2px;
+        overflow: hidden;
+        z-index: 1001;
+    }
+
+    .loading-progress {
+        height: 100%;
+        background: linear-gradient(90deg, #cccccc, #888888, #cccccc);
+        border-radius: 2px;
+        animation: loadingProgress 3s ease-in-out infinite;
+    }
+
+    @keyframes loadingProgress {
+        0% { width: 0%; }
+        50% { width: 100%; }
+        100% { width: 0%; }
+    }
+
+    /* Responsive design */
+    @media (max-width: 768px) {
+        body {
+            width: 95%;
+            padding: 15px;
+        }
+        
+        #greeting {
+            font-size: 2em;
+        }
+        
+        #grid {
+            grid-template-columns: 1fr;
+            gap: 20px;
+        }
+        
+        .category-container {
+            padding: 20px;
+        }
     }
   </style>
 </head>
 <body>
-  <!-- Matrix Digital Rain Background -->
-  <div id="matrix-bg"></div>
-  
-  <!-- Scanline overlay -->
+  <!-- Cyber background elements -->
+  <div id="cyber-bg"></div>
+  <div class="hex-grid"></div>
+  <div class="data-stream" id="dataStream"></div>
   <div class="scanlines"></div>
 
-  <div id="greeting">what i thought i'd do was...</div>
+  <!-- UI corner elements -->
+  <div class="ui-element ui-corner-tl">╔═══════════</div>
+  <div class="ui-element ui-corner-tr">═══════════╗</div>
+  <div class="ui-element ui-corner-bl">╚═══════════</div>
+  <div class="ui-element ui-corner-br">═══════════╝</div>
+
+  <!-- Loading bar -->
+  <div class="loading-bar">
+    <div class="loading-progress"></div>
+  </div>
+
+  <!-- Main content -->
+  <div id="greeting">Neural Interface</div>
   <div id="date"></div>
   
-    
-  <script async src="js/date.js" onerror="console.log('date.js not found, using fallback')"></script>
+  <div id="grid"></div>
   
-  <!-- you can add or remove whatever links you want. even new categories. just follow the examples below -->
+  <!-- Links data -->
   <script id="links" type="application/json">
-        {
-            "social": {
-                "reddit": "https://reddit.com/r/all",
-                "tuta email": "https://app.tuta.com",
-                "myspace": "https://spacehey.com/",
-                "bluesky": "https://bsky.app",
-                "skyfeed": "https://skyfeed.app",
-                "mastodon": "https://social.vivaldi.net/home",
-                "textnow": "https://textnow.com/"
-            },
-            "dev": {
-                "twit": "https://twit.tv",
-                "internxt": "https://drive.internxt.com",
-                "cryptpad": "https://cryptpad.fr",
-                "chatgpt": "https://chatgpt.com",
-                "claude 4": "https://claude.ai",
-                "cyberchef": "https://gchq.github.io/CyberChef",
-                "git": "https://github.com/",
-                "jsfiddle": "https://jsfiddle.net/",
-                "stack overflow": "https://stackoverfow.com"
-            },
-            "linux": {
-                "aur": "https://aur.archlinux.org/",
-                "arch wiki": "https://wiki.archlinux.org/",
-                "gaming on linux": "https://gamingonlinux.com",
-                "it's foss": "https://itsfoss.com",
-                "foss torrents": "https://fosstorrents.com",
-                "unix porn": "https://reddit.com/r/unixporn/new/",
-                "distrowatch": "https://distrowatch.com/"
-            },
-            "media": {
-                "1337x": "https://1337x.to/",
-                "twitch": "https://twitch.tv/directory/following",
-                "radio garden": "https://radio.garden",
-                "nyaa": "https://nyaa.si/",
-                "fmhy": "https://fmhy.net",
-                "manganato": "https://manganato.com",
-                "readcomics": "https://readcomic.me",
-                "penny-arcade": "https://penny-arcade.com",
-                "anna's archive": "https://annas-archive.org",
-                "internet archive": "https://archive.org"
-            },
-            "games": {
-                "roms megathread": "https://r-roms.github.io/",
-                "rom/iso": "https://retrogametalk.com/repository/",
-                "my abandonware": "https://myabandonware.com",
-                "zophar's domain": "https://zophar.net"
-            },
-            "eve": {
-                "zkillboard": "https://zkillboard.com",
-                "eve metro": "https://evemetro.com",
-                "dotlan": "https://evemaps.dotlan.net",
-                "localthreat": "https://localthreat.xyz",
-                "eve trading": "https://eve-trading.net",
-                "eve tycoon": "https://evetycoon.com",
-                "safeexplo": "https://whtype.info/",
-                "pathfinder": "https://pathfinder.eve-linknet.com/map/MTQ0OTY%3D#"
-            }
+    {
+        "social": {
+            "reddit": "https://reddit.com/r/all",
+            "tuta email": "https://app.tuta.com",
+            "myspace": "https://spacehey.com/",
+            "bluesky": "https://bsky.app",
+            "skyfeed": "https://skyfeed.app",
+            "mastodon": "https://social.vivaldi.net/home",
+            "textnow": "https://textnow.com/"
+        },
+        "dev": {
+            "twit": "https://twit.tv",
+            "internxt": "https://drive.internxt.com",
+            "cryptpad": "https://cryptpad.fr",
+            "chatgpt": "https://chatgpt.com",
+            "claude 4": "https://claude.ai",
+            "cyberchef": "https://gchq.github.io/CyberChef",
+            "git": "https://github.com/",
+            "jsfiddle": "https://jsfiddle.net/",
+            "stack overflow": "https://stackoverflow.com"
+        },
+        "linux": {
+            "aur": "https://aur.archlinux.org/",
+            "arch wiki": "https://wiki.archlinux.org/",
+            "gaming on linux": "https://gamingonlinux.com",
+            "it's foss": "https://itsfoss.com",
+            "foss torrents": "https://fosstorrents.com",
+            "unix porn": "https://reddit.com/r/unixporn/new/",
+            "distrowatch": "https://distrowatch.com/"
+        },
+        "media": {
+            "1337x": "https://1337x.to/",
+            "twitch": "https://twitch.tv/directory/following",
+            "radio garden": "https://radio.garden",
+            "nyaa": "https://nyaa.si/",
+            "fmhy": "https://fmhy.net",
+            "manganato": "https://manganato.com",
+            "readcomics": "https://readcomic.me",
+            "penny-arcade": "https://penny-arcade.com",
+            "anna's archive": "https://annas-archive.org",
+            "internet archive": "https://archive.org"
+        },
+        "games": {
+            "roms megathread": "https://r-roms.github.io/",
+            "rom/iso": "https://retrogametalk.com/repository/",
+            "my abandonware": "https://myabandonware.com",
+            "zophar's domain": "https://zophar.net"
+        },
+        "eve": {
+            "zkillboard": "https://zkillboard.com",
+            "eve metro": "https://evemetro.com",
+            "dotlan": "https://evemaps.dotlan.net",
+            "localthreat": "https://localthreat.xyz",
+            "eve trading": "https://eve-trading.net",
+            "eve tycoon": "https://evetycoon.com",
+            "safeexplo": "https://whtype.info/",
+            "pathfinder": "https://pathfinder.eve-linknet.com/map/MTQ0OTY%3D#"
         }
-    </script>
-  
-  <script src="js/index.js" onerror="console.log('index.js not found')"></script>
+    }
+  </script>
 
   <script>
-    // Matrix digital rain effect - only add this
-    function createMatrixRain() {
-        const matrixBg = document.getElementById('matrix-bg');
-        const characters = 'アァカサタナハマヤャラワガザダバパイィキシチニヒミリヰギジヂビピウゥクスツヌフムユュルグズブヅプエェケセテネヘメレヱゲゼデベペオォコソトホモヨョロヲゴゾドボポヴッン0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    // Date functionality
+    function updateDate() {
+        const now = new Date();
+        const options = { 
+            weekday: 'long', 
+            year: 'numeric', 
+            month: 'long', 
+            day: 'numeric',
+            hour: '2-digit',
+            minute: '2-digit'
+        };
+        document.getElementById('date').textContent = now.toLocaleDateString('en-US', options);
+    }
+
+    // Generate links grid
+    function generateLinksGrid() {
+        const linksData = JSON.parse(document.getElementById('links').textContent);
+        const grid = document.getElementById('grid');
         
-        const columns = Math.floor(window.innerWidth / 20);
+        Object.entries(linksData).forEach(([category, links]) => {
+            const container = document.createElement('div');
+            container.className = 'category-container';
+            
+            const title = document.createElement('h2');
+            title.className = 'category-title';
+            title.textContent = category;
+            
+            const list = document.createElement('ul');
+            
+            Object.entries(links).forEach(([name, url]) => {
+                const item = document.createElement('li');
+                const link = document.createElement('a');
+                link.href = url;
+                link.textContent = name;
+                item.appendChild(link);
+                list.appendChild(item);
+            });
+            
+            container.appendChild(title);
+            container.appendChild(list);
+            grid.appendChild(container);
+        });
+    }
+
+    // Create data stream particles
+    function createDataStream() {
+        const dataStream = document.getElementById('dataStream');
+        const particleCount = 15;
         
-        for (let i = 0; i < columns; i++) {
-            const column = document.createElement('div');
-            column.className = 'matrix-column';
-            column.style.left = (i * 20) + 'px';
-            column.style.animationDuration = Math.random() * 8 + 6 + 's';
-            column.style.animationDelay = Math.random() * 5 + 's';
-            
-            let text = '';
-            const length = Math.floor(Math.random() * 50) + 10;
-            for (let j = 0; j < length; j++) {
-                text += characters.charAt(Math.floor(Math.random() * characters.length)) + '\n';
-            }
-            
-            column.textContent = text;
-            matrixBg.appendChild(column);
+        for (let i = 0; i < particleCount; i++) {
+            const particle = document.createElement('div');
+            particle.className = 'data-particle';
+            particle.style.left = Math.random() * 100 + '%';
+            particle.style.animationDuration = (Math.random() * 8 + 4) + 's';
+            particle.style.animationDelay = Math.random() * 2 + 's';
+            dataStream.appendChild(particle);
         }
     }
 
-    // Initialize matrix rain when page loads
-    createMatrixRain();
+    // Glitch effect for text
+    function addGlitchEffect() {
+        const greeting = document.getElementById('greeting');
+        const originalText = greeting.textContent;
+        
+        setInterval(() => {
+            if (Math.random() < 0.1) {
+                const glitchChars = '!@#$%^&*()_+-=[]{}|;:,.<>?';
+                let glitchedText = '';
+                
+                for (let i = 0; i < originalText.length; i++) {
+                    if (Math.random() < 0.1) {
+                        glitchedText += glitchChars[Math.floor(Math.random() * glitchChars.length)];
+                    } else {
+                        glitchedText += originalText[i];
+                    }
+                }
+                
+                greeting.textContent = glitchedText;
+                
+                setTimeout(() => {
+                    greeting.textContent = originalText;
+                }, 100);
+            }
+        }, 3000);
+    }
 
-    // Recreate on window resize
-    window.addEventListener('resize', () => {
-        document.getElementById('matrix-bg').innerHTML = '';
-        createMatrixRain();
+    // Initialize everything
+    document.addEventListener('DOMContentLoaded', () => {
+        updateDate();
+        generateLinksGrid();
+        createDataStream();
+        addGlitchEffect();
+        
+        // Update date every minute
+        setInterval(updateDate, 60000);
     });
 
-    // Random character changes for extra effect
-    setInterval(() => {
-        const columns = document.querySelectorAll('.matrix-column');
-        columns.forEach(column => {
-            if (Math.random() < 0.1) {
-                const characters = 'アァカサタナハマヤャラワガザダバパイィキシチニヒミリヰギジヂビピウゥクスツヌフムユュルグズブヅプエェケセテネヘメレヱゲゼデベペオォコソトホモヨョロヲゴゾドボポヴッン0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-                const lines = column.textContent.split('\n');
-                const randomLine = Math.floor(Math.random() * lines.length);
-                lines[randomLine] = characters.charAt(Math.floor(Math.random() * characters.length));
-                column.textContent = lines.join('\n');
-            }
-        });
-    }, 500);
+    // Handle window resize for responsive particles
+    window.addEventListener('resize', () => {
+        const dataStream = document.getElementById('dataStream');
+        dataStream.innerHTML = '';
+        createDataStream();
+    });
   </script>
 </body>
 </html>
