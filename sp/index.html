@@ -3,446 +3,275 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>~/startpage</title>
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Share+Tech+Mono&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap');
 
     * {
       box-sizing: border-box;
-    }
-
-    /* Animated geometric background */
-    #cyber-bg {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: linear-gradient(135deg, #0f0f0f 0%, #1a1a1a 50%, #2a2a2a 100%);
-        z-index: -3;
-        overflow: hidden;
-    }
-
-    /* Hexagonal grid overlay */
-    .hex-grid {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background-image: 
-            radial-gradient(circle at 50% 50%, rgba(200, 200, 200, 0.1) 1px, transparent 1px),
-            linear-gradient(0deg, rgba(200, 200, 200, 0.05) 1px, transparent 1px),
-            linear-gradient(90deg, rgba(200, 200, 200, 0.05) 1px, transparent 1px);
-        background-size: 30px 30px, 30px 30px, 30px 30px;
-        z-index: -2;
-        animation: gridMove 20s linear infinite;
-    }
-
-    @keyframes gridMove {
-        0% { transform: translate(0, 0); }
-        100% { transform: translate(30px, 30px); }
-    }
-
-    /* Data stream particles */
-    .data-stream {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        z-index: -1;
-        pointer-events: none;
-    }
-
-    .data-particle {
-        position: absolute;
-        width: 2px;
-        height: 20px;
-        background: linear-gradient(to bottom, transparent, #cccccc, transparent);
-        animation: dataFlow linear infinite;
-        opacity: 0.6;
-    }
-
-    @keyframes dataFlow {
-        0% {
-            transform: translateY(-100vh) translateX(0);
-            opacity: 0;
-        }
-        10% {
-            opacity: 1;
-        }
-        90% {
-            opacity: 1;
-        }
-        100% {
-            transform: translateY(100vh) translateX(20px);
-            opacity: 0;
-        }
-    }
-
-    /* Scanlines */
-    .scanlines {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: linear-gradient(transparent 50%, rgba(255, 255, 255, 0.02) 50%);
-        background-size: 100% 4px;
-        pointer-events: none;
-        z-index: 1000;
-        animation: scanlineMove 0.1s linear infinite;
-    }
-
-    @keyframes scanlineMove {
-        0% { transform: translateY(0); }
-        100% { transform: translateY(4px); }
-    }
-
-    /* Main layout */
-    html {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        min-height: 100vh;
-        background: #000;
-        overflow-x: hidden;
-        font-family: 'Share Tech Mono', monospace;
+      margin: 0;
+      padding: 0;
     }
 
     body {
-        color: #e0e0e0;
-        margin: 0;
-        padding: 20px;
-        background: rgba(0, 0, 0, 0.85);
-        backdrop-filter: blur(2px);
-        border: 1px solid rgba(200, 200, 200, 0.3);
-        border-radius: 10px;
-        box-shadow: 
-            0 0 50px rgba(150, 150, 150, 0.2),
-            inset 0 0 30px rgba(255, 255, 255, 0.05);
-        max-width: 1200px;
-        width: 90%;
+      font-family: 'JetBrains Mono', monospace;
+      background: #000000;
+      color: #ffffff;
+      font-size: 14px;
+      line-height: 1.4;
+      padding: 20px;
+      min-height: 100vh;
+      overflow-x: hidden;
     }
 
-    /* Header styles */
-    #greeting {
-        color: #f0f0f0;
-        font-family: 'Orbitron', monospace;
-        font-size: 2.8em;
-        font-weight: 900;
-        text-align: center;
-        margin-bottom: 10px;
-        text-transform: uppercase;
-        letter-spacing: 3px;
-        text-shadow: 
-            0 0 10px #cccccc,
-            0 0 20px #aaaaaa,
-            0 0 30px #888888;
-        animation: hologramFlicker 3s ease-in-out infinite;
-        position: relative;
+    .terminal-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      background: rgba(0, 0, 0, 0.9);
+      border: 2px solid #ffffff;
+      border-radius: 8px;
+      padding: 20px;
+      position: relative;
     }
 
-    #greeting::before {
-        content: '> SYSTEM ACTIVE';
-        position: absolute;
-        top: -30px;
-        left: 50%;
-        transform: translateX(-50%);
-        font-size: 0.3em;
-        color: #999999;
-        letter-spacing: 2px;
-        animation: typewriter 4s steps(13) infinite;
+    .terminal-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid #ffffff;
     }
 
-    @keyframes hologramFlicker {
-        0%, 100% {
-            text-shadow: 
-                0 0 10px #cccccc,
-                0 0 20px #aaaaaa,
-                0 0 30px #888888;
-        }
-        50% {
-            text-shadow: 
-                0 0 5px #cccccc,
-                0 0 15px #aaaaaa,
-                0 0 25px #888888;
-        }
-        75% {
-            text-shadow: 
-                0 0 15px #cccccc,
-                0 0 25px #aaaaaa,
-                0 0 35px #888888;
-        }
+    .terminal-title {
+      color: #ffffff;
+      font-weight: 700;
+      font-size: 16px;
     }
 
-    @keyframes typewriter {
-        0% { width: 0; }
-        50% { width: 100%; }
-        100% { width: 0; }
+    .terminal-buttons {
+      display: flex;
+      gap: 8px;
     }
 
-    #date {
-        font-family: 'Share Tech Mono', monospace;
-        font-size: 1.2em;
-        font-weight: 400;
-        color: #bbbbbb;
-        text-align: center;
-        margin: 20px 0 40px;
-        text-shadow: 0 0 10px #999999;
-        letter-spacing: 1px;
+    .btn {
+      width: 16px;
+      height: 14px;
+      border: 1px solid #ffffff;
+      background: #000000;
+      color: #ffffff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 10px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: all 0.2s ease;
     }
 
-    #date::before {
-        content: '[ ';
-        color: #cccccc;
+    .btn:hover {
+      background: #ffffff;
+      color: #000000;
     }
 
-    #date::after {
-        content: ' ]';
-        color: #cccccc;
+    .btn-minimize::before { content: "_"; }
+    .btn-maximize::before { content: "□"; }
+    .btn-close::before { content: "×"; }
+
+    .prompt {
+      color: #ffffff;
+      margin-bottom: 20px;
     }
 
-    /* Grid layout */
-    #grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-        gap: 25px;
-        padding: 20px 0;
+    .prompt::before {
+      content: "user@terminal:~$ ";
+      color: #ffffff;
     }
 
-    .category-container {
-        padding: 25px;
-        border-radius: 8px;
-        background: linear-gradient(135deg, rgba(255, 255, 255, 0.08) 0%, rgba(200, 200, 200, 0.04) 100%);
-        border: 1px solid rgba(200, 200, 200, 0.25);
-        box-shadow: 
-            0 5px 15px rgba(0, 0, 0, 0.3),
-            inset 0 1px 0 rgba(255, 255, 255, 0.1);
-        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        position: relative;
-        overflow: hidden;
+    .date-time {
+      margin-bottom: 20px;
+      color: #ffffff;
+      font-size: 12px;
     }
 
-    .category-container::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: -100%;
-        width: 100%;
-        height: 100%;
-        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.15), transparent);
-        transition: left 0.6s;
+    .commands-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 30px;
+      margin-top: 20px;
     }
 
-    .category-container:hover::before {
-        left: 100%;
+    .command-section {
+      margin-bottom: 20px;
     }
 
-    .category-container:hover {
-        background: linear-gradient(135deg, rgba(255, 255, 255, 0.15) 0%, rgba(200, 200, 200, 0.08) 100%);
-        border-color: #dddddd;
-        box-shadow: 
-            0 10px 30px rgba(0, 0, 0, 0.4),
-            inset 0 1px 0 rgba(255, 255, 255, 0.2);
-        transform: translateY(-3px) scale(1.02);
+    .command-header {
+      color: #ffffff;
+      font-weight: 700;
+      margin-bottom: 10px;
+      font-size: 16px;
+      text-transform: uppercase;
     }
 
-    .category-container:hover .category-title {
-        color: #ffffff;
-        text-shadow: 0 0 15px #cccccc;
+    .command-header::before {
+      content: "# ";
+      color: #ffffff;
     }
 
-    .category-title {
-        color: #dddddd;
-        font-family: 'Orbitron', monospace;
-        font-size: 1.4em;
-        font-weight: 700;
-        margin: 0 0 20px 0;
-        text-transform: uppercase;
-        letter-spacing: 2px;
-        text-shadow: 0 0 10px #aaaaaa;
-        position: relative;
-        padding-bottom: 10px;
+    .command-list {
+      list-style: none;
+      padding-left: 20px;
     }
 
-    .category-title::after {
-        content: '';
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        width: 30px;
-        height: 2px;
-        background: linear-gradient(90deg, #cccccc, transparent);
-        animation: expandLine 2s ease-in-out infinite;
+    .command-item {
+      margin-bottom: 5px;
+      transition: all 0.2s ease;
     }
 
-    @keyframes expandLine {
-        0%, 100% { width: 30px; }
-        50% { width: 60px; }
+    .command-item:hover {
+      background: rgba(255, 255, 255, 0.1);
+      padding-left: 10px;
+      margin-left: -10px;
     }
 
-    /* Link styles */
-    ul {
-        list-style: none;
-        margin: 0;
-        padding: 0;
+    .command-item::before {
+      content: "-> ";
+      color: #ffffff;
+      margin-right: 5px;
     }
 
-    li {
-        margin: 0 0 8px 15px;
-        padding: 8px 12px;
-        line-height: 1.4;
-        color: #b8b8b8;
-        font-weight: 400;
-        border-left: 2px solid rgba(200, 200, 200, 0.3);
-        position: relative;
-        transition: all 0.2s ease;
+    .command-link {
+      color: #ffffff;
+      text-decoration: none;
+      transition: all 0.2s ease;
     }
 
-    li::before {
-        content: '▶';
-        position: absolute;
-        left: -8px;
-        color: #888888;
-        font-size: 0.8em;
-        opacity: 0;
-        transition: opacity 0.2s ease;
+    .command-link:hover {
+      color: #cccccc;
+      text-shadow: 0 0 5px #ffffff;
     }
 
-    li:hover {
-        border-left-color: #dddddd;
-        color: #ffffff;
-        text-shadow: 0 0 8px #cccccc;
-        padding-left: 20px;
+    .cursor {
+      animation: blink 1s infinite;
+      color: #ffffff;
     }
 
-    li:hover::before {
-        opacity: 1;
+    @keyframes blink {
+      0%, 50% { opacity: 1; }
+      51%, 100% { opacity: 0; }
     }
 
-    a {
-        text-decoration: none;
-        color: inherit;
-        transition: all 0.2s ease;
-        font-family: 'Share Tech Mono', monospace;
-        font-size: 0.95em;
-        letter-spacing: 0.5px;
+    .typing-effect {
+      display: inline-block;
+      overflow: hidden;
+      white-space: nowrap;
+      border-right: 2px solid #ffffff;
+      animation: typing 2s steps(30) 1s forwards, blink-cursor 1s infinite;
+      width: 0;
     }
 
-    a:hover {
-        color: #ffffff;
-        text-shadow: 
-            0 0 5px #cccccc,
-            0 0 10px #aaaaaa;
+    @keyframes typing {
+      from { width: 0; }
+      to { width: 100%; }
     }
 
-    /* Floating UI elements */
-    .ui-element {
-        position: fixed;
-        color: #cccccc;
-        font-family: 'Share Tech Mono', monospace;
-        font-size: 0.8em;
-        opacity: 0.5;
-        pointer-events: none;
-        z-index: 500;
+    @keyframes blink-cursor {
+      0%, 50% { border-color: #ffffff; }
+      51%, 100% { border-color: transparent; }
     }
 
-    .ui-corner-tl {
-        top: 20px;
-        left: 20px;
+    .status-bar {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: #000000;
+      border-top: 1px solid #ffffff;
+      padding: 5px 20px;
+      font-size: 12px;
+      color: #ffffff;
+      display: flex;
+      justify-content: space-between;
+      z-index: 1000;
     }
 
-    .ui-corner-tr {
-        top: 20px;
-        right: 20px;
+    .help-text {
+      margin-bottom: 20px;
+      color: #888888;
+      font-size: 12px;
     }
 
-    .ui-corner-bl {
-        bottom: 20px;
-        left: 20px;
-    }
-
-    .ui-corner-br {
-        bottom: 20px;
-        right: 20px;
-    }
-
-    /* Loading bar animation */
-    .loading-bar {
-        position: fixed;
-        bottom: 10px;
-        left: 50%;
-        transform: translateX(-50%);
-        width: 200px;
-        height: 3px;
-        background: rgba(200, 200, 200, 0.2);
-        border-radius: 2px;
-        overflow: hidden;
-        z-index: 1001;
-    }
-
-    .loading-progress {
-        height: 100%;
-        background: linear-gradient(90deg, #cccccc, #888888, #cccccc);
-        border-radius: 2px;
-        animation: loadingProgress 3s ease-in-out infinite;
-    }
-
-    @keyframes loadingProgress {
-        0% { width: 0%; }
-        50% { width: 100%; }
-        100% { width: 0%; }
+    .help-text::before {
+      content: "# ";
+      color: #ffffff;
     }
 
     /* Responsive design */
     @media (max-width: 768px) {
-        body {
-            width: 95%;
-            padding: 15px;
-        }
-        
-        #greeting {
-            font-size: 2em;
-        }
-        
-        #grid {
-            grid-template-columns: 1fr;
-            gap: 20px;
-        }
-        
-        .category-container {
-            padding: 20px;
-        }
+      body {
+        padding: 10px;
+        font-size: 12px;
+      }
+      
+      .terminal-container {
+        padding: 15px;
+      }
+      
+      .commands-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+      
+      .status-bar {
+        padding: 5px 10px;
+        font-size: 10px;
+      }
+    }
+
+    /* Scrollbar styling */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: #000000;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: #ffffff;
+      border-radius: 4px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: #cccccc;
     }
   </style>
 </head>
 <body>
-  <!-- Cyber background elements -->
-  <div id="cyber-bg"></div>
-  <div class="hex-grid"></div>
-  <div class="data-stream" id="dataStream"></div>
-  <div class="scanlines"></div>
+  <div class="terminal-container">
+    <div class="terminal-header">
+      <div class="terminal-title">Terminal - ~/startpage</div>
+      <div class="terminal-buttons">
+        <div class="btn btn-close"></div>
+        <div class="btn btn-minimize"></div>
+        <div class="btn btn-maximize"></div>
+      </div>
+    </div>
 
-  <!-- UI corner elements -->
-  <div class="ui-element ui-corner-tl">╔═══════════</div>
-  <div class="ui-element ui-corner-tr">═══════════╗</div>
-  <div class="ui-element ui-corner-bl">╚═══════════</div>
-  <div class="ui-element ui-corner-br">═══════════╝</div>
-
-  <!-- Loading bar -->
-  <div class="loading-bar">
-    <div class="loading-progress"></div>
+    <div class="date-time" id="datetime"></div>
+    
+    <div class="help-text">Type 'help' for available commands or click on any link below</div>
+    
+    <div class="prompt typing-effect">startpage loaded successfully</div>
+    
+    <div class="commands-grid" id="commandsGrid"></div>
   </div>
 
-  <!-- Main content -->
-  <div id="greeting">Neural Interface</div>
-  <div id="date"></div>
-  
-  <div id="grid"></div>
-  
+  <div class="status-bar">
+    <span>Ready</span>
+    <span id="statusTime"></span>
+  </div>
+
   <!-- Links data -->
   <script id="links" type="application/json">
     {
@@ -496,108 +325,89 @@
   </script>
 
   <script>
-    // Date functionality
-    function updateDate() {
-        const now = new Date();
-        const options = { 
-            weekday: 'long', 
-            year: 'numeric', 
-            month: 'long', 
-            day: 'numeric',
-            hour: '2-digit',
-            minute: '2-digit'
-        };
-        document.getElementById('date').textContent = now.toLocaleDateString('en-US', options);
+    // Update date and time
+    function updateDateTime() {
+      const now = new Date();
+      const dateOptions = { 
+        weekday: 'short', 
+        year: 'numeric', 
+        month: 'short', 
+        day: 'numeric',
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit'
+      };
+      
+      const dateStr = now.toLocaleDateString('en-US', dateOptions);
+      document.getElementById('datetime').textContent = `# System time: ${dateStr}`;
+      
+      const timeStr = now.toLocaleTimeString('en-US', { hour12: false });
+      document.getElementById('statusTime').textContent = timeStr;
     }
 
-    // Generate links grid
-    function generateLinksGrid() {
-        const linksData = JSON.parse(document.getElementById('links').textContent);
-        const grid = document.getElementById('grid');
+    // Generate commands grid
+    function generateCommandsGrid() {
+      const linksData = JSON.parse(document.getElementById('links').textContent);
+      const grid = document.getElementById('commandsGrid');
+      
+      Object.entries(linksData).forEach(([category, links]) => {
+        const section = document.createElement('div');
+        section.className = 'command-section';
         
-        Object.entries(linksData).forEach(([category, links]) => {
-            const container = document.createElement('div');
-            container.className = 'category-container';
-            
-            const title = document.createElement('h2');
-            title.className = 'category-title';
-            title.textContent = category;
-            
-            const list = document.createElement('ul');
-            
-            Object.entries(links).forEach(([name, url]) => {
-                const item = document.createElement('li');
-                const link = document.createElement('a');
-                link.href = url;
-                link.textContent = name;
-                item.appendChild(link);
-                list.appendChild(item);
-            });
-            
-            container.appendChild(title);
-            container.appendChild(list);
-            grid.appendChild(container);
+        const header = document.createElement('div');
+        header.className = 'command-header';
+        header.textContent = category;
+        
+        const list = document.createElement('ul');
+        list.className = 'command-list';
+        
+        Object.entries(links).forEach(([name, url]) => {
+          const item = document.createElement('li');
+          item.className = 'command-item';
+          
+          const link = document.createElement('a');
+          link.href = url;
+          link.className = 'command-link';
+          link.textContent = name;
+          
+          item.appendChild(link);
+          list.appendChild(item);
         });
+        
+        section.appendChild(header);
+        section.appendChild(list);
+        grid.appendChild(section);
+      });
     }
 
-    // Create data stream particles
-    function createDataStream() {
-        const dataStream = document.getElementById('dataStream');
-        const particleCount = 15;
-        
-        for (let i = 0; i < particleCount; i++) {
-            const particle = document.createElement('div');
-            particle.className = 'data-particle';
-            particle.style.left = Math.random() * 100 + '%';
-            particle.style.animationDuration = (Math.random() * 8 + 4) + 's';
-            particle.style.animationDelay = Math.random() * 2 + 's';
-            dataStream.appendChild(particle);
-        }
-    }
-
-    // Glitch effect for text
-    function addGlitchEffect() {
-        const greeting = document.getElementById('greeting');
-        const originalText = greeting.textContent;
-        
-        setInterval(() => {
-            if (Math.random() < 0.1) {
-                const glitchChars = '!@#$%^&*()_+-=[]{}|;:,.<>?';
-                let glitchedText = '';
-                
-                for (let i = 0; i < originalText.length; i++) {
-                    if (Math.random() < 0.1) {
-                        glitchedText += glitchChars[Math.floor(Math.random() * glitchChars.length)];
-                    } else {
-                        glitchedText += originalText[i];
-                    }
-                }
-                
-                greeting.textContent = glitchedText;
-                
-                setTimeout(() => {
-                    greeting.textContent = originalText;
-                }, 100);
-            }
-        }, 3000);
-    }
-
-    // Initialize everything
-    document.addEventListener('DOMContentLoaded', () => {
-        updateDate();
-        generateLinksGrid();
-        createDataStream();
-        addGlitchEffect();
-        
-        // Update date every minute
-        setInterval(updateDate, 60000);
+    // Add keyboard shortcuts
+    document.addEventListener('keydown', (e) => {
+      if (e.ctrlKey && e.key === 'l') {
+        e.preventDefault();
+        // Clear screen effect
+        document.body.style.opacity = '0';
+        setTimeout(() => {
+          document.body.style.opacity = '1';
+        }, 100);
+      }
     });
 
-    // Handle window resize for responsive particles
-    window.addEventListener('resize', () => {
-        const dataStream = document.getElementById('dataStream');
-        dataStream.innerHTML = '';
-        createDataStream();
+    // Initialize
+    document.addEventListener('DOMContentLoaded', () => {
+      updateDateTime();
+      generateCommandsGrid();
+      
+      // Update time every second
+      setInterval(updateDateTime, 1000);
+      
+      // Remove typing effect after animation
+      setTimeout(() => {
+        const typingElement = document.querySelector('.typing-effect');
+        if (typingElement) {
+          typingElement.classList.remove('typing-effect');
+          typingElement.style.borderRight = 'none';
+        }
+      }, 4000);
     });
   </script>
 </body>
