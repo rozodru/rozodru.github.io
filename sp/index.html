@@ -1,415 +1,442 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>~/startpage</title>
-  <style>
-    @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap');
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>~/startpage</title>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap");
 
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
 
-    body {
-      font-family: 'JetBrains Mono', monospace;
-      background: #000000;
-      color: #ffffff;
-      font-size: 14px;
-      line-height: 1.4;
-      padding: 20px;
-      min-height: 100vh;
-      overflow-x: hidden;
-    }
-
-    .terminal-container {
-      max-width: 1200px;
-      margin: 0 auto;
-      background: rgba(0, 0, 0, 0.9);
-      border: 2px solid #ffffff;
-      border-radius: 8px;
-      padding: 20px;
-      position: relative;
-    }
-
-    .terminal-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-bottom: 20px;
-      padding-bottom: 10px;
-      border-bottom: 1px solid #ffffff;
-    }
-
-    .terminal-title {
-      color: #ffffff;
-      font-weight: 700;
-      font-size: 16px;
-    }
-
-    .terminal-buttons {
-      display: flex;
-      gap: 8px;
-    }
-
-    .btn {
-      width: 16px;
-      height: 14px;
-      border: 1px solid #ffffff;
-      background: #000000;
-      color: #ffffff;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 10px;
-      font-weight: bold;
-      cursor: pointer;
-      transition: all 0.2s ease;
-    }
-
-    .btn:hover {
-      background: #ffffff;
-      color: #000000;
-    }
-
-    .btn-minimize::before { content: "_"; }
-    .btn-maximize::before { content: "□"; }
-    .btn-close::before { content: "×"; }
-
-    .prompt {
-      color: #ffffff;
-      margin-bottom: 20px;
-    }
-
-    .prompt::before {
-      content: "user@terminal:~$ ";
-      color: #ffffff;
-    }
-
-    .date-time {
-      margin-bottom: 20px;
-      color: #ffffff;
-      font-size: 12px;
-    }
-
-    .commands-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 30px;
-      margin-top: 20px;
-    }
-
-    .command-section {
-      margin-bottom: 20px;
-    }
-
-    .command-header {
-      color: #ffffff;
-      font-weight: 700;
-      margin-bottom: 10px;
-      font-size: 16px;
-      text-transform: uppercase;
-    }
-
-    .command-header::before {
-      content: "# ";
-      color: #ffffff;
-    }
-
-    .command-list {
-      list-style: none;
-      padding-left: 20px;
-    }
-
-    .command-item {
-      margin-bottom: 5px;
-      transition: all 0.2s ease;
-    }
-
-    .command-item:hover {
-      background: rgba(255, 255, 255, 0.1);
-      padding-left: 10px;
-      margin-left: -10px;
-    }
-
-    .command-item::before {
-      content: "-> ";
-      color: #ffffff;
-      margin-right: 5px;
-    }
-
-    .command-link {
-      color: #ffffff;
-      text-decoration: none;
-      transition: all 0.2s ease;
-    }
-
-    .command-link:hover {
-      color: #cccccc;
-      text-shadow: 0 0 5px #ffffff;
-    }
-
-    .cursor {
-      animation: blink 1s infinite;
-      color: #ffffff;
-    }
-
-    @keyframes blink {
-      0%, 50% { opacity: 1; }
-      51%, 100% { opacity: 0; }
-    }
-
-    .typing-effect {
-      display: inline-block;
-      overflow: hidden;
-      white-space: nowrap;
-      border-right: 2px solid #ffffff;
-      animation: typing 2s steps(30) 1s forwards, blink-cursor 1s infinite;
-      width: 0;
-    }
-
-    @keyframes typing {
-      from { width: 0; }
-      to { width: 100%; }
-    }
-
-    @keyframes blink-cursor {
-      0%, 50% { border-color: #ffffff; }
-      51%, 100% { border-color: transparent; }
-    }
-
-    .status-bar {
-      position: fixed;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      background: #000000;
-      border-top: 1px solid #ffffff;
-      padding: 5px 20px;
-      font-size: 12px;
-      color: #ffffff;
-      display: flex;
-      justify-content: space-between;
-      z-index: 1000;
-    }
-
-    .help-text {
-      margin-bottom: 20px;
-      color: #888888;
-      font-size: 12px;
-    }
-
-    .help-text::before {
-      content: "# ";
-      color: #ffffff;
-    }
-
-    /* Responsive design */
-    @media (max-width: 768px) {
       body {
-        padding: 10px;
+        font-family: "JetBrains Mono", monospace;
+        background: #000000;
+        color: #ffffff;
+        font-size: 14px;
+        line-height: 1.4;
+        padding: 20px;
+        min-height: 100vh;
+        overflow-x: hidden;
+      }
+
+      .terminal-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        background: rgba(0, 0, 0, 0.9);
+        border: 2px solid #ffffff;
+        border-radius: 8px;
+        padding: 20px;
+        position: relative;
+      }
+
+      .terminal-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 20px;
+        padding-bottom: 10px;
+        border-bottom: 1px solid #ffffff;
+      }
+
+      .terminal-title {
+        color: #ffffff;
+        font-weight: 700;
+        font-size: 16px;
+      }
+
+      .terminal-buttons {
+        display: flex;
+        gap: 8px;
+      }
+
+      .btn {
+        width: 16px;
+        height: 14px;
+        border: 1px solid #ffffff;
+        background: #000000;
+        color: #ffffff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 10px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: all 0.2s ease;
+      }
+
+      .btn:hover {
+        background: #ffffff;
+        color: #000000;
+      }
+
+      .btn-minimize::before {
+        content: "_";
+      }
+      .btn-maximize::before {
+        content: "□";
+      }
+      .btn-close::before {
+        content: "×";
+      }
+
+      .prompt {
+        color: #ffffff;
+        margin-bottom: 20px;
+      }
+
+      .prompt::before {
+        content: "user@terminal:~$ ";
+        color: #ffffff;
+      }
+
+      .date-time {
+        margin-bottom: 20px;
+        color: #ffffff;
         font-size: 12px;
       }
-      
-      .terminal-container {
-        padding: 15px;
-      }
-      
+
       .commands-grid {
-        grid-template-columns: 1fr;
-        gap: 20px;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 30px;
+        margin-top: 20px;
       }
-      
+
+      .command-section {
+        margin-bottom: 20px;
+      }
+
+      .command-header {
+        color: #ffffff;
+        font-weight: 700;
+        margin-bottom: 10px;
+        font-size: 16px;
+        text-transform: uppercase;
+      }
+
+      .command-header::before {
+        content: "# ";
+        color: #ffffff;
+      }
+
+      .command-list {
+        list-style: none;
+        padding-left: 20px;
+      }
+
+      .command-item {
+        margin-bottom: 5px;
+        transition: all 0.2s ease;
+      }
+
+      .command-item:hover {
+        background: rgba(255, 255, 255, 0.1);
+        padding-left: 10px;
+        margin-left: -10px;
+      }
+
+      .command-item::before {
+        content: "-> ";
+        color: #ffffff;
+        margin-right: 5px;
+      }
+
+      .command-link {
+        color: #ffffff;
+        text-decoration: none;
+        transition: all 0.2s ease;
+      }
+
+      .command-link:hover {
+        color: #cccccc;
+        text-shadow: 0 0 5px #ffffff;
+      }
+
+      .cursor {
+        animation: blink 1s infinite;
+        color: #ffffff;
+      }
+
+      @keyframes blink {
+        0%,
+        50% {
+          opacity: 1;
+        }
+        51%,
+        100% {
+          opacity: 0;
+        }
+      }
+
+      .typing-effect {
+        display: inline-block;
+        overflow: hidden;
+        white-space: nowrap;
+        border-right: 2px solid #ffffff;
+        animation:
+          typing 2s steps(30) 1s forwards,
+          blink-cursor 1s infinite;
+        width: 0;
+      }
+
+      @keyframes typing {
+        from {
+          width: 0;
+        }
+        to {
+          width: 100%;
+        }
+      }
+
+      @keyframes blink-cursor {
+        0%,
+        50% {
+          border-color: #ffffff;
+        }
+        51%,
+        100% {
+          border-color: transparent;
+        }
+      }
+
       .status-bar {
-        padding: 5px 10px;
-        font-size: 10px;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: #000000;
+        border-top: 1px solid #ffffff;
+        padding: 5px 20px;
+        font-size: 12px;
+        color: #ffffff;
+        display: flex;
+        justify-content: space-between;
+        z-index: 1000;
       }
-    }
 
-    /* Scrollbar styling */
-    ::-webkit-scrollbar {
-      width: 8px;
-    }
+      .help-text {
+        margin-bottom: 20px;
+        color: #888888;
+        font-size: 12px;
+      }
 
-    ::-webkit-scrollbar-track {
-      background: #000000;
-    }
+      .help-text::before {
+        content: "# ";
+        color: #ffffff;
+      }
 
-    ::-webkit-scrollbar-thumb {
-      background: #ffffff;
-      border-radius: 4px;
-    }
+      /* Responsive design */
+      @media (max-width: 768px) {
+        body {
+          padding: 10px;
+          font-size: 12px;
+        }
 
-    ::-webkit-scrollbar-thumb:hover {
-      background: #cccccc;
-    }
-  </style>
-</head>
-<body>
-  <div class="terminal-container">
-    <div class="terminal-header">
-      <div class="terminal-title">Terminal - ~/startpage</div>
-      <div class="terminal-buttons">
-        <div class="btn btn-close"></div>
-        <div class="btn btn-minimize"></div>
-        <div class="btn btn-maximize"></div>
+        .terminal-container {
+          padding: 15px;
+        }
+
+        .commands-grid {
+          grid-template-columns: 1fr;
+          gap: 20px;
+        }
+
+        .status-bar {
+          padding: 5px 10px;
+          font-size: 10px;
+        }
+      }
+
+      /* Scrollbar styling */
+      ::-webkit-scrollbar {
+        width: 8px;
+      }
+
+      ::-webkit-scrollbar-track {
+        background: #000000;
+      }
+
+      ::-webkit-scrollbar-thumb {
+        background: #ffffff;
+        border-radius: 4px;
+      }
+
+      ::-webkit-scrollbar-thumb:hover {
+        background: #cccccc;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="terminal-container">
+      <div class="terminal-header">
+        <div class="terminal-title">Terminal - ~/startpage</div>
+        <div class="terminal-buttons">
+          <div class="btn btn-close"></div>
+          <div class="btn btn-minimize"></div>
+          <div class="btn btn-maximize"></div>
+        </div>
       </div>
+
+      <div class="date-time" id="datetime"></div>
+
+      <div class="help-text">
+        Type 'help' for available commands or click on any link below
+      </div>
+
+      <div class="prompt typing-effect">startpage loaded successfully</div>
+
+      <div class="commands-grid" id="commandsGrid"></div>
     </div>
 
-    <div class="date-time" id="datetime"></div>
-    
-    <div class="help-text">Type 'help' for available commands or click on any link below</div>
-    
-    <div class="prompt typing-effect">startpage loaded successfully</div>
-    
-    <div class="commands-grid" id="commandsGrid"></div>
-  </div>
+    <div class="status-bar">
+      <span>Ready</span>
+      <span id="statusTime"></span>
+    </div>
 
-  <div class="status-bar">
-    <span>Ready</span>
-    <span id="statusTime"></span>
-  </div>
-
-  <!-- Links data -->
-  <script id="links" type="application/json">
-    {
+    <!-- Links data -->
+    <script id="links" type="application/json">
+      {
         "social": {
-            "lemmy": "https://lemmy.world",
-            "hacker news": "https://news.ycombinator.com",
-            "myspace": "https://spacehey.com/",
-            "bluesky": "https://bsky.app",
-            "mastodon": "https://social.vivaldi.net/@rozodru",
-            "skyfeed": "https://skyfeed.app",
-            "textnow": "https://textnow.com/"
+          "lemmy": "https://lemmy.world",
+          "hacker news": "https://news.ycombinator.com",
+          "myspace": "https://spacehey.com/",
+          "mastodon": "https://social.vivaldi.net/@rozodru",
+          "textnow": "https://textnow.com/"
         },
         "dev": {
-            "twit": "https://twit.tv",
-            "filen": "https://filen.io",
-            "mullvadvpn": "https://mullvad.net/en/account/devices",
-            "cryptpad": "https://cryptpad.fr",
-            "chatgpt": "https://chatgpt.com",
-            "claude 4": "https://claude.ai",
-            "git": "https://github.com/",
-            "jsfiddle": "https://jsfiddle.net/"
+          "twit": "https://twit.tv",
+          "filen": "https://filen.io",
+          "mullvadvpn": "https://mullvad.net/en/account/devices",
+          "cryptpad": "https://cryptpad.fr",
+          "chatgpt": "https://chatgpt.com",
+          "claude 4": "https://claude.ai",
+          "git": "https://github.com/",
+          "jsfiddle": "https://jsfiddle.net/"
         },
         "linux": {
-            "aur": "https://aur.archlinux.org/",
-            "arch wiki": "https://wiki.archlinux.org/",
-            "gaming on linux": "https://gamingonlinux.com",
-            "it's foss": "https://itsfoss.com",
-            "foss torrents": "https://fosstorrents.com",
-            "unix porn": "https://safereddit.com/r/unixporn/new/",
-            "distrowatch": "https://distrowatch.com/"
+          "aur": "https://aur.archlinux.org/",
+          "arch wiki": "https://wiki.archlinux.org/",
+          "gaming on linux": "https://gamingonlinux.com",
+          "it's foss": "https://itsfoss.com",
+          "foss torrents": "https://fosstorrents.com",
+          "unix porn": "https://safereddit.com/r/unixporn/new/",
+          "distrowatch": "https://distrowatch.com/"
         },
         "media": {
-            "invidious": "https://invidious.f5.si/feed/popular",
-            "1337x": "https://1337x.to/",
-            "twitch": "https://twitch.tv/directory/following",
-            "radio garden": "https://radio.garden",
-            "nyaa": "https://nyaa.si/",
-            "fmhy": "https://fmhy.net",
-            "manganato": "https://manganato.com",
-            "readcomics": "https://readcomic.me",
-            "penny-arcade": "https://penny-arcade.com",
-            "anna's archive": "https://annas-archive.org"
+          "invidious": "https://invidious.f5.si/feed/popular",
+          "1337x": "https://1337x.to/",
+          "twitch": "https://twitch.tv/directory/following",
+          "radio garden": "https://radio.garden",
+          "nyaa": "https://nyaa.si/",
+          "fmhy": "https://fmhy.net",
+          "manganato": "https://manganato.com",
+          "readcomics": "https://readcomic.me",
+          "penny-arcade": "https://penny-arcade.com",
+          "anna's archive": "https://annas-archive.org"
         },
         "games": {
-            "isthereanydeal": "https://isthereanydeal.com/",
-            "roms megathread": "https://r-roms.github.io/",
-            "rom/iso": "https://retrogametalk.com/repository/",
-            "my abandonware": "https://myabandonware.com",
-            "zophar's domain": "https://zophar.net"
+          "isthereanydeal": "https://isthereanydeal.com/",
+          "roms megathread": "https://r-roms.github.io/",
+          "rom/iso": "https://retrogametalk.com/repository/",
+          "my abandonware": "https://myabandonware.com",
+          "zophar's domain": "https://zophar.net"
         }
-    }
-  </script>
-
-  <script>
-    // Update date and time
-    function updateDateTime() {
-      const now = new Date();
-      const dateOptions = { 
-        weekday: 'short', 
-        year: 'numeric', 
-        month: 'short', 
-        day: 'numeric',
-        hour: '2-digit',
-        minute: '2-digit',
-        second: '2-digit'
-      };
-      
-      const dateStr = now.toLocaleDateString('en-US', dateOptions);
-      document.getElementById('datetime').textContent = `# System time: ${dateStr}`;
-      
-      const timeStr = now.toLocaleTimeString('en-US', { hour12: false });
-      document.getElementById('statusTime').textContent = timeStr;
-    }
-
-    // Generate commands grid
-    function generateCommandsGrid() {
-      const linksData = JSON.parse(document.getElementById('links').textContent);
-      const grid = document.getElementById('commandsGrid');
-      
-      Object.entries(linksData).forEach(([category, links]) => {
-        const section = document.createElement('div');
-        section.className = 'command-section';
-        
-        const header = document.createElement('div');
-        header.className = 'command-header';
-        header.textContent = category;
-        
-        const list = document.createElement('ul');
-        list.className = 'command-list';
-        
-        Object.entries(links).forEach(([name, url]) => {
-          const item = document.createElement('li');
-          item.className = 'command-item';
-          
-          const link = document.createElement('a');
-          link.href = url;
-          link.className = 'command-link';
-          link.textContent = name;
-          
-          item.appendChild(link);
-          list.appendChild(item);
-        });
-        
-        section.appendChild(header);
-        section.appendChild(list);
-        grid.appendChild(section);
-      });
-    }
-
-    // Add keyboard shortcuts
-    document.addEventListener('keydown', (e) => {
-      if (e.ctrlKey && e.key === 'l') {
-        e.preventDefault();
-        // Clear screen effect
-        document.body.style.opacity = '0';
-        setTimeout(() => {
-          document.body.style.opacity = '1';
-        }, 100);
       }
-    });
+    </script>
 
-    // Initialize
-    document.addEventListener('DOMContentLoaded', () => {
-      updateDateTime();
-      generateCommandsGrid();
-      
-      // Update time every second
-      setInterval(updateDateTime, 1000);
-      
-      // Remove typing effect after animation
-      setTimeout(() => {
-        const typingElement = document.querySelector('.typing-effect');
-        if (typingElement) {
-          typingElement.classList.remove('typing-effect');
-          typingElement.style.borderRight = 'none';
+    <script>
+      // Update date and time
+      function updateDateTime() {
+        const now = new Date();
+        const dateOptions = {
+          weekday: "short",
+          year: "numeric",
+          month: "short",
+          day: "numeric",
+          hour: "2-digit",
+          minute: "2-digit",
+          second: "2-digit",
+        };
+
+        const dateStr = now.toLocaleDateString("en-US", dateOptions);
+        document.getElementById("datetime").textContent =
+          `# System time: ${dateStr}`;
+
+        const timeStr = now.toLocaleTimeString("en-US", { hour12: false });
+        document.getElementById("statusTime").textContent = timeStr;
+      }
+
+      // Generate commands grid
+      function generateCommandsGrid() {
+        const linksData = JSON.parse(
+          document.getElementById("links").textContent,
+        );
+        const grid = document.getElementById("commandsGrid");
+
+        Object.entries(linksData).forEach(([category, links]) => {
+          const section = document.createElement("div");
+          section.className = "command-section";
+
+          const header = document.createElement("div");
+          header.className = "command-header";
+          header.textContent = category;
+
+          const list = document.createElement("ul");
+          list.className = "command-list";
+
+          Object.entries(links).forEach(([name, url]) => {
+            const item = document.createElement("li");
+            item.className = "command-item";
+
+            const link = document.createElement("a");
+            link.href = url;
+            link.className = "command-link";
+            link.textContent = name;
+
+            item.appendChild(link);
+            list.appendChild(item);
+          });
+
+          section.appendChild(header);
+          section.appendChild(list);
+          grid.appendChild(section);
+        });
+      }
+
+      // Add keyboard shortcuts
+      document.addEventListener("keydown", (e) => {
+        if (e.ctrlKey && e.key === "l") {
+          e.preventDefault();
+          // Clear screen effect
+          document.body.style.opacity = "0";
+          setTimeout(() => {
+            document.body.style.opacity = "1";
+          }, 100);
         }
-      }, 4000);
-    });
-  </script>
-</body>
+      });
+
+      // Initialize
+      document.addEventListener("DOMContentLoaded", () => {
+        updateDateTime();
+        generateCommandsGrid();
+
+        // Update time every second
+        setInterval(updateDateTime, 1000);
+
+        // Remove typing effect after animation
+        setTimeout(() => {
+          const typingElement = document.querySelector(".typing-effect");
+          if (typingElement) {
+            typingElement.classList.remove("typing-effect");
+            typingElement.style.borderRight = "none";
+          }
+        }, 4000);
+      });
+    </script>
+  </body>
 </html>
